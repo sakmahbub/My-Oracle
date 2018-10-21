@@ -1,0 +1,43 @@
+create procedure
+==============
+
+create or replace procedure mahbub 
+as 
+begin 
+dbms_output.put_line('Hello World');
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

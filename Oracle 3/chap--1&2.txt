@@ -1,0 +1,115 @@
+Variable Declare and Print
+=================
+
+declare
+   x varchar2(20) :='Mostafizur is a ';
+   y varchar2(20) :='Gneious mal';
+result varchar2(30) :=x || y;
+
+begin 
+dbms_output.put_line('Who is gneious mal?: ' || result);
+
+end;
+
+
+
+
+
+Local and Global
+=============
+
+declare
+   x number :=95;
+   y number :=85;
+
+begin
+    dbms_output.put_line('Outer Variable x : ' || x );
+    dbms_output.put_line('Outer Variable y : ' || y );
+
+   declare
+     a number :=195;
+     b number :=185;
+   begin
+      dbms_output.put_line('Outer Variable a : ' || a );
+      dbms_output.put_line('Outer Variable b : ' || b );
+
+      declare
+       a number :=10;
+       b number :=15;
+      begin
+          dbms_output.put_line('Outer Variable a : ' || a );
+          dbms_output.put_line('Outer Variable b : ' || b );
+      end;
+   end;
+end;
+
+
+
+================
+declare
+  subtype name is varchar2(20);
+  subtype message is varchar2(100);
+
+  aa name;
+  bb message;
+begin
+     aa:= 'Mahbub';
+     bb:=' Welcome to the World of PL/SQL';
+     dbms_output.put_line('Hello ' || aa|| bb);
+      
+
+    
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

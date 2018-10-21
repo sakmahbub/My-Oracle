@@ -1,0 +1,74 @@
+step-1 (create table)
+==============
+	create table student(user_id number(5) primary key, username varchar2(20) not null);
+
+step-2  (create procedure)
+==================
+	create or replace procedure getStudentByUserId( 
+  	   p_userid in student.user_id%type,
+  	   p_username out student.username%type)
+
+is
+begin
+
+        select username
+        into p_username 
+   from student where user_id = p_userid;
+end;
+
+step-3 (insert data)
+===================
+insert into student values(1, 'admin');
+insert into student values(2, 'abc');
+insert into student values(3, 'test');
+
+step-4 (call procedure and display data)
+===========================
+declare
+	p_username student.username%type;
+      begin
+
+  	getStudentByUserId(1,p_username );
+  	dbms_output.put_line('username : ' || p_username );
+
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

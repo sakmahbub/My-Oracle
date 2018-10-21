@@ -1,0 +1,38 @@
+UNION Operator
+=================
+select EMPLOYEE_ID, JOB_ID from employees
+union
+select EMPLOYEE_ID, JOB_ID from job_history;
+
+UNION ALL Operator
+=================
+select EMPLOYEE_ID, JOB_ID from employees
+union all
+select EMPLOYEE_ID, JOB_ID from job_history;
+
+Intersect Operator
+========================
+select EMPLOYEE_ID, JOB_ID from employees
+intersect
+select EMPLOYEE_ID, JOB_ID from job_history;
+
+
+Minus Operator
+========================
+select EMPLOYEE_ID, JOB_ID from employees
+minus 
+select EMPLOYEE_ID, JOB_ID from job_history;
+
+
+
+All Operator
+========================
+select EMPLOYEE_ID, JOB_ID, salary, last_name from employees
+union 
+select EMPLOYEE_ID, JOB_ID, 0, '' from job_history;
+
+
+
+
+
+

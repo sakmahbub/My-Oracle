@@ -1,0 +1,55 @@
+Create User:
+	 create user kotha identified by kotha;
+Grant:
+	grant dba to kotha;
+
+Create table:
+	create table customer(id number(3) primary key, mobile varchar2(12) unique, country varchar2(15) default 'bd');
+
+create sequence:
+	create sequence custo_seq increment by 1;	
+
+create  backup table:
+	create table customer_backup as select * from customer;
+
+create  trigger:
+	create or replace trigger cus_after_insert after insert on customer for each row 
+	declare 
+	begin  
+	insert into customer_backup values(:new.id, :new.mobile, :new.country); 
+dbms_output.put_line('Record successfully update into customer_backup table'); 
+end;/
+
+insert:
+ 	insert into customer(id, mobile, country)values(custo_seq.nextval, '01722928984', 'India');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

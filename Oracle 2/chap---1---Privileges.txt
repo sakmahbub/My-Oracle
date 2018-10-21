@@ -1,0 +1,92 @@
+connect sys as sysdba
+password: sys
+
+
+create user xyz identified by xyz;
+SESSION na dile (user XYZ lacks CREATE SESSION privilege; logon denied)
+connect sys as sysdba
+grant create session to xyz;
+
+table grant na dile
+create table test(id number(5) primary key, name varchar2(15));
+
+table na create hole space nite hobe//  alter user xyz quota 500m on system;
+
+
+===Role===
+
+connect sys as sysdba
+create user xyz2 identified by xyz2;
+create role manager;
+grant create session, create table, create view to manager;
+grant manager to xyz2;
+alter user xyz2 quota 500m on system;
+connect xyz2
+create table student(id number(5) primary key, name varchar2(15));
+insert into student(id, name)values(10,'Sakil');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

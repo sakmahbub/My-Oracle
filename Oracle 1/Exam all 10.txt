@@ -1,0 +1,95 @@
+1.	 create user eid identified by eid;
+	grant dba to eid;
+2.
+A.	department table:
+
+ 	create table department(dep_id number(4) primary key not null, department_name varchar2(30));
+
+B.	employee table:
+	
+	create table employee(emp_id number(4) primary key not null, emp_name varchar2(20), mobile number(12) unique, salary number(8) check(salary>10000), joining_date date default sysdate, country varchar2(15) default 'BD', dep_id number(4), constraint d_e_fk foreign key(dep_id) references department(dep_id));
+
+C.	describe department;
+	describe employee;
+
+3.
+A.	create sequence dep_seq increment by 10;
+B.	create sequence emp_seq increment by 5;
+C.	select sequence_name from user_sequences;
+
+4.
+A.	select index_name from user_indexes;
+B.	create index dep_idx on department(department_name);
+C.	select index_name from user_indexes;
+D.	insert into department(dep_id, department_name)values(dep_seq.nextval,'Admin');
+	insert into department(dep_id, department_name)values(dep_seq.nextval,'Software');
+	insert into department(dep_id, department_name)values(dep_seq.nextval,'Marketing');
+E.	create view depview as select * from department;
+F.	select view_name from user_views;
+G.	create synonym dep for department;
+	create synonym dv for depview;
+H.	table:        select * from department;
+	tablesyn:   select * from dep;
+	viewsyn:   select * from dv;
+
+5. 
+A.	select index_name from user_indexes;
+B.	create index emp_idx on employee(emp_name);
+C.	select sequence_name from user_sequences;
+D.	insert into employee(emp_id, emp_name, mobile, salary, joining_date, country, dep_id )values(emp_seq.nextval,'Mahbub',01722928984,50000,'10 may 2015', 'USA', 1); 
+	insert into employee(emp_id, emp_name, mobile, salary, joining_date, country, dep_id )values(emp_seq.nextval,'Sakil',01765647836,42000,'10 Jun 2016', 'India', 21);
+	insert into employee(emp_id, emp_name, mobile, salary, joining_date, dep_id )values(emp_seq.nextval,'Ruhul',01765647456,20000,'1 Jun 2016', 11);
+	insert into employee(emp_id, emp_name, mobile, salary, dep_id )values(emp_seq.nextval,'Mortoza',01765697456,20000, 1);
+	insert into employee(emp_id, emp_name, mobile, salary, country, dep_id )values(emp_seq.nextval,'Sakil',01822928984,42000, 'UAE', 21);
+E.	create view empview as select * from employee;
+F.	select view_name from user_views;
+G.	create synonym emp for employee;
+	create synonym ev for empview;
+H.	table:        select * from employee;
+	tablesyn:   select * from emp;
+	viewsyn:   select * from ev;
+
+6.
+A.	update department  set department_name='Sales' where dep_id=21;
+B.	alter table employee add email varchar2(20) unique;
+C.	update department  set department_name='Sales' where dep_id=1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

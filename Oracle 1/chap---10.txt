@@ -1,0 +1,137 @@
+create view
+===============
+create view emview as select employee_id, last_name,salary from employees where department_id=80;
+
+view name replace
+=============
+create or replace view isratview as select employee_id, last_name,salary  from employees;
+
+see one row/view
+=============
+select last_name from isratview where employee_id=100;
+
+
+
+Create table teacher
+==============
+create table teacher(t_id number(2) primary key, t_name varchar2(20) not null, salary number(7,2) check(salary>5000), mobile number(11) unique, joining_date date default sysdate);
+
+insert to teacher:
+ insert into teacher(t_id, t_name, salary, mobile, joining_date)values(10, 'Rashed', 10000, 01722928984,'25-jul-16');
+insert into teacher(t_id, t_name, salary, mobile, joining_date)values(20, 'Halim', 15000, 01722928983,'25-jul-17');
+insert into teacher(t_id, t_name, salary, mobile, joining_date)values(30, 'kebria', 20000, 01722928985,'25-jul-16');
+ insert into teacher(t_id, t_name, salary, mobile, joining_date)values(40, 'Mortoza', 30000, 01765647836,'01-jul-16');
+
+Create table student
+==============
+create table student(s_id number(2) primary key, s_name varchar2(20) not null, education_Q varchar2(15), district varchar2(12), teacher_id number(2), constraint s_t_fk foreign key(teacher_id) references teacher(t_id));
+
+insert to student:
+insert into student(s_id, s_name, education_Q, district, teacher_id)values(1, 'sakil', 'MSc','Bogra',10);
+ insert into student(s_id, s_name, education_Q, district, teacher_id)values(2, 'Mahbub', 'MSc','Naogaon',10);
+insert into student(s_id, s_name, education_Q, district, teacher_id)values(3, 'Kamal', 'BSc','Dhaka',20);
+ insert into student(s_id, s_name, education_Q, district, teacher_id)values(4, 'Jamal', 'SSC','Dhaka',40);
+
+create view 
+==========
+create view stview as select s_id, s_name, education_Q, district from student where teacher_id=10;
+
+replace view(view name or column add or remove)
+==================================
+create or replace view sview as select s_id,teacher_id, s_name, education_Q, district from student where teacher_id=10;
+
+
+Create sequence
+=============
+create sequence mah increment by 10 start with 50 maxvalue 999 nocache nocycle;
+
+alter sequence
+==============
+alter sequence mah increment by 10 maxvalue 90 nocache nocycle;
+
+show sequence
+===========
+select sequence_name from user_sequences;
+
+insert 
+========
+insert into emp(e_id,e_name, salary, mobile,d_id)values(ed_seq.nextval,'Atik',25000,01722928984);
+
+table..........
+==========
+create table dep(d_id number(4) primary key, d_name varchar2(20));
+create sequence d_seq increment by 10 start with 50 maxvalue 100 nocache nocycle;
+
+insert into dep(d_id,d_name)values(d_seq.nextval,'sa_man');
+insert into dep(d_id,d_name)values(d_seq.nextval,'it_man');
+insert into dep(d_id,d_name)values(d_seq.nextval,'admin');
+insert into dep(d_id,d_name)values(d_seq.nextval,'hr');
+insert into dep(d_id,d_name)values(d_seq.nextval,'fuctory');
+insert into dep(d_id,d_name)values(d_seq.nextval,'marketing');
+
+
+create table emp(e_id number(4) primary key, e_name varchar2(20), salary number(10,2),  check(salary<50000), mobile number(12) unique, d_id number(4),constraint e_d_fk foreign key(d_id) references dep(d_id));
+create sequence e_seq increment by 5 start with 5 maxvalue 200 nocache nocycle;
+
+insert into emp(e_id,e_name, salary, mobile,d_id)values(e_seq.nextval,'Atik',25000,01722928984,50);
+insert into emp(e_id,e_name, salary, mobile,d_id)values(e_seq.nextval,'Sakil',45000,01765647836,60);
+insert into emp(e_id,e_name, salary, mobile,d_id)values(e_seq.nextval,'Ruhul',35000,01683715092,70);
+insert into emp(e_id,e_name, salary, mobile,d_id)values(e_seq.nextval,'Nazmul',35000,01722711081,80);
+insert into emp(e_id,e_name, salary, mobile,d_id)values(e_seq.nextval,'Mahbub',49000,01554289138,70);
+insert into emp(e_id,e_name, salary, mobile,d_id)values(e_seq.nextval,'mortuza',30000,01822928984,100);
+
+
+create view mview as select e.e_id, e.e_name, d.d_name from emp e, dep d where e.d_id=d.d_id;
+create or replace view mahview as select e.e_id, e.e_name, e.salary, e.mobile, d.d_name from emp e, dep d where e.d_id=d.d_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

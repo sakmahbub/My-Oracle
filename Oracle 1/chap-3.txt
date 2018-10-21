@@ -1,0 +1,86 @@
+select last_name, hire_date from employees where hire_date='06/17/2003';
+
+
+
+select last_name, (sysdate-hire_date)/30 as Days, Round((sysdate-hire_date)/30) as Days from employees;
+
+select last_name, hire_date, months_between ('07/11/2018','11/10/1989'), round(months_between ('07/11/2018','11/10/1991'))/12 from employees;
+
+select last_name, to_char(hire_date,'mm-yy') months_hired from employees;
+select last_name, to_char(hire_date,'yyyy') months_hired from employees;
+
+select last_name, to_char(hire_date,'Mon') months_hired from employees;
+select last_name, to_char(hire_date,'Month') months_hired from employees;
+koto tomo day==== select last_name, to_char(hire_date,'dd') months_hired from employees;
+
+day name=== select last_name, to_char(hire_date,'day') months_hired from employees;
+
+sotapdi== select last_name, to_char(hire_date,'cc') months_hired from employees;
+
+select last_name, to_char(hire_date,'ddth month') months_hired from employees;
+
+use , and $ === select last_name, to_char(salary,'$99,999.00') salary from employees;
+
+nes
+select last_name, substr(last_name,1,3), concat(substr(last_name,1,3),'_US'), upper(concat(substr(last_name,1,3),'_US')) from employees;
+
+3-49/ using nvl
+=======
+select last_name, salary,commission_pct, nvl(commission_pct, 0), (salary*12) + (salary*12*nvl(commission_pct, 0)) an_sal from employees;
+
+
+3-50/ using nvl2
+===================
+select last_name, salary,commission_pct, nvl2(commission_pct, salary+COMMISSION_PCT, salary) income from employees where department_id IN (50,80);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

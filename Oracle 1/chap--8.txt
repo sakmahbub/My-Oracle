@@ -1,0 +1,37 @@
+insert data any table
+===================
+
+insert into employees(EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,COMMISSION_PCT,MANAGER_ID,DEPARTMENT_ID)
+values(208,'Mahbubur','Rahman','sakilcpa2@gmail.com','01722928984',SYSDATE,'IT_PROG',35000,null,100,90);
+
+
+update-single
+==========
+update (table name)
+set Name='Mahbubbbbbb'
+where id=1;
+
+update-multiple
+==========
+update employees set  LAST_NAME='Mahbubbbbbb', salary=95000
+where id=208;
+
+
+dalete from value
+=============
+delete from employees where id=208;
+delete from employees where id!=208;
+
+
+Truncate 
+==============
+truncate table table_name;
+
+Rollback savePoint
+============
+rollback to (savepoint_name)
+
+Rollback savePoint all delete
+===========
+rollback;
+

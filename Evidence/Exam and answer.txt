@@ -1,0 +1,185 @@
+0. Show the usages of savepoint and rollback at 
+1.create an user name eid
+2. create following tables;
+	A. department
+		Fields: dep_id, department_name	
+	B. employee
+		Fields: emp_id, emp_name, mobile unique, salary more than 10000,
+		joining_date using default, country default as BD,
+		dep_id Foreign Key with department
+	C. Show Both table Structres.
+	D. Create 3 triggers(Insert, update, delete) for employee table.
+3. Create sequence for
+	A. department incremented by 10
+	B. employee incremented by 5
+	C. Show created sequence list.
+	
+4. Department table:
+	A. show index
+	B. create an index for the column department_name
+	C. show index again.
+	D.Insert 3 data's to departments for ADMIN, SOFTWARE and MARKETING 
+	  using Sequence and Procedure.
+	E. create view for department
+	F. Show View List
+	G. create synonym for table and View
+	H. retrieve data from view, table synonym and view synonym.
+5. Employee table:
+	A. show index
+	B. create an index for the column emp_name
+	C. show sequence again.
+	D.Insert 5 data's to employee 
+	  using sequence and Procedure.
+	E. create view for employee
+	F. Show View List
+	G. create synonym for table and View
+	H. retrieve data from view, table synonym and view synonym.
+	
+6.  A. update MARKETING department to SALES
+	B. add new column at employee table like email unique
+	C. update first row of employee table with department SALES.
+
+	
+
+
+
+========================ANSWER=================================
+
+
+Create User:
+	create user eidf identified by eidf;
+Grant Permission:
+	grant dba to eidf;
+Connect to the User:
+	connect eidf;
+Create Table:
+	Department:
+		create table department (dep_id number(3) primary key,department_name varchar2(10));
+	Employee:
+		create table employee(emp_id number(3) primary key,emp_name varchar2(10),
+		mobile number(11) unique,salary number(10) check(salary > 10000),
+		joining_date date default sysdate,country varchar2(3) default 'BD',
+		dep_id number(3),constraint dep_emp_fk foreign key (dep_id) references department (dep_id));
+	Employee_backup:
+		create table employee_backup(emp_id number(3) primary key,emp_name varchar2(10),mobile number(11) unique,
+		salary number(10) check(salary > 10000),joining_date date default sysdate,
+		country varchar2(3) default 'BD',dep_id number(3),constraint dep_emp1_fk foreign key (dep_id) 
+		references department (dep_id));	
+Show Both Table Structure:
+	1.desc department;
+	2.desc employee;
+Create Trigger for Insert:
+	create or replace trigger emp_after_insert after insert on employee
+    	for each row
+    	declare
+    	begin
+    	insert into employee_backup values(:new.emp_id,:new.emp_name,:new.mobile,:new.salary,:new.joining_date,:new.country,:new.dep_id);
+    	dbms_output.put_line('Successfully Inserted');
+    	end;
+    	/
+Create Trigger for Update:
+	create or replace trigger emp_after_update after update on employee
+    	for each row
+    	declare
+    	begin
+    	update employee_backup set emp_name = :new.emp_name where emp_id = :old.emp_id;
+    	dbms_output.put_line('Successfully Updated');
+    	end;
+    	/
+Create Trigger for Delete:
+	create or replace trigger emp_after_delete after delete on employee
+    	for each row
+    	declare
+    	begin
+    	delete employee_backup where emp_id = :new.emp_id;
+    	dbms_output.put_line('Successfully Deleted');
+    	end;
+    	/
+Create Sequence:
+	Department: create sequence dep1_seq increment by 10 start with 1 maxvalue 100 nocache nocycle;
+	Employee: create sequence emp1_seq increment by 5 start with 1 maxvalue 100 nocache nocycle;
+
+Show Sequence List:
+	select sequence_name from user_sequences;
+
+Department Table:
+	A.select index_name from user_indexes;
+	B.create index department_name_idx on department(department_name);
+	C.select index_name from user_indexes;
+	D.Create Procedure:
+		create or replace procedure insertdata(p_id in department.dep_id%type,p_name in department.department_name%type)
+    		is
+    		begin
+    		insert into department(dep_id,department_name)values(p_id,p_name);
+    		end;
+    		/
+	   Inseert Data By Procedure:
+		 begin
+    		insertdata(dep1_seq.nextval,'Software');
+    		end;
+    		/
+	E.Create View:
+		create view dep_view as select department_name from department;
+	F.Show View:
+		select view_name from user_views;
+	G.Create Synonym:
+		create synonym dep_syn for department;
+		create synonym view_syn for dep_view;
+	H.Retrieve Data:
+		select * from dep_view;
+		select * from dep_syn;
+		select * from view_syn;
+
+Employee Table:
+	A.select index_name from user_indexes;
+	B.create index emp_name_idx on employee(emp_name);
+	C.select index_name from user_indexes;
+	D.Insert Data By Procedure:
+		create or replace procedure insertdatas(p_id in employee.emp_name%type,p_name in employee.emp_name%type)
+    		is
+    		begin
+    		insert into employee(emp_id,emp_name)values(p_id,p_name);
+    		end;
+    		/
+	E.Create View:
+		create view emp_view as select emp_id,emp_name,country from employee;
+	F.Show view List:
+		select view_name from user_views;
+	G. Create Synonym:
+		create synonym emp_syn for employee;
+		create synonym view1_syn for emp_view;
+	H.Retrieve Data:
+		select * from emp_view;
+		select * from emp_syn;
+		select * from view1_syn;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

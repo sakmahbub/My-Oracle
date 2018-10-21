@@ -1,0 +1,52 @@
+connect sys as sysdba
+create user sak identified by sak;
+grant dba to sak;
+
+connect sak
+create table customer(id number(3) primary key, name varchar2 (15) not null, mobile varchar2(12) unique);
+create table customer_backup(id number(3) primary key, name varchar2 (15) not null, mobile varchar2(12) unique);
+create sequence c_seq increment by 10 start with 100 maxvalue 1000 nocycle nocache;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

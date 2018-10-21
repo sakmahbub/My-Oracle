@@ -1,0 +1,153 @@
+====create new user====
+=====grant dba to (uesr)=======
+
+insert and create into another table
+========================
+		create table employees as select * from hr.employees;
+
+delete data:
+=========
+	delete from employees;
+
+insert and create into another table:
+=========================
+			create table employees_backup as select * from employees;
+
+create Insert trigger
+================
+create or replace trigger emp_after_insert after insert on employees for each row
+declare
+begin
+    insert into employees_backup values(:new.Employee_id, :new.FIRST_NAME, :new.LAST_NAME, :new.EMAIL, :new.PHONE_NUMBER, :new.HIRE_DATE, :new.JOB_ID, :new.SALARY, :new.COMMISSION_PCT, :new.MANAGER_ID,:new.DEPARTMENT_ID);
+
+dbms_output.put_line('Record successfully inserted into employees_backup table');
+end;
+
+create update trigger
+================
+create or replace trigger emp_after_update after update on employees for each row
+declare
+begin
+   update employees_backup set FIRST_NAME= :new.FIRST_NAME, LAST_NAME= :new.LAST_NAME where employee_id= :old.employee_id;
+
+dbms_output.put_line('Record successfully update into employees_backup table');
+end;
+
+
+insert data:
+=======
+	insert into employees  select * from hr.employees where employee_id=101;
+
+
+update  data:
+=============
+update employees set FIRST_NAME='Mahbub', LAST_NAME='sakil' where EMPLOYEE_ID=103;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

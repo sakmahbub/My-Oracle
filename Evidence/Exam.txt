@@ -1,0 +1,65 @@
+connect sys as sysdba
+create user abcd identified by abcd;
+grant dba to abcd;
+connect abcd 
+
+Create customer table========================
+	create table customer(id number(3) primary key, name varchar2(12) not null, mobile varchar2(12) unique, country varchar2(15) default 'BD');
+
+create sequence==========================
+	create sequence custo_seq increment by 10 start with 100 maxvalue 1000 nocache nocycle;
+
+Create customer_backup table===============
+	create table customer_backup(id number(3) primary key, name varchar2(12) not null, mobile varchar2(12) unique, country varchar2(15) default 'BD');
+
+
+
+
+=================Insert Trigger========================
+
+create or replace trigger cus_after_insert after insert on customer for each row
+	declare
+	begin
+	insert into customer_backup values(:new.id, :new.name, :new.mobile, :new.country);
+	dbms_output.put_line('insert succesfully into customer_backup table');
+	end;
+ 	/
+
+	insert into customer(id, name, mobile, country)values(custo_seq.nextval,'Mahbub','01722928984','USA');
+	insert into customer(id, name, mobile, country)values(custo_seq.nextval,'Nazmul','01722711081','India');
+	insert into customer(id, name, mobile)values(custo_seq.nextval,'Sakil','01753807127');
+	insert into customer(id, name, mobile)values(custo_seq.nextval,'Mostafi','01765647836');
+	insert into customer(id, name, mobile)values(custo_seq.nextval,'Rahman','01554289138');
+
+
+=================Update Trigger========================
+
+create or replace trigger cus_after_update after update on customer for each row
+	declare
+	begin
+	update customer_backup set  name=:new.name, mobile=:new.mobile, country=:new.country where id=:old.id;
+	dbms_output.put_line('update succesfully into customer_backup table');
+	end;
+	 /
+
+	update customer set name='Rafi', mobile='01683715092' where id=100;
+
+
+=================Delete Trigger========================
+
+create or replace trigger cus_after_delete after delete on customer for each row
+	declare
+	begin
+	delete customer_backup where id=:old.id;
+	dbms_output.put_line('delete succesfully into customer_backup table');
+	end;
+ 	/
+
+	delete customer where id=140;
+
+
+
+
+
+
+

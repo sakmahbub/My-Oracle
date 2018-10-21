@@ -1,0 +1,103 @@
+sorto diye salary barano/ using CASE 
+=========================
+select last_name, job_id, salary, CASE job_id when 'IT_PROG' THEN 1.10*salary  when 'ST_CLERK' THEN 1.15*salary  WHEN 'SA_REP' THEN 1.20*salary ELSE salary end "REVISED_SALARY" from employees;
+
+sorto diye salary barano/ using DECODE
+=========================
+select last_name, job_id, salary, decode(job_id, 'IT_PROG', 1.10*salary, 'ST_CLERK', 1.15*salary, 'SA_REP', 1.20*salary, salary) REVISED_SALARY from employees;
+
+department er vitor koto jon
+==================
+select last_name, job_id, salary, DEPARTMENT_ID from employees where DEPARTMENT_ID=100;
+
+Group by max...min....avg etc
+==============================
+select DEPARTMENT_ID, count(salary), round(avg(salary)), max(salary), min(salary), sum(salary), round(stddev(salary)), round(variance(salary)) from employees group by DEPARTMENT_ID;
+
+
+%...%
+==================
+select count(salary), round(avg(salary)), max(salary), min(salary), sum(salary), round(stddev(salary)), round(variance(salary)) from employees where job_id LIKE '%REP%';
+
+Group by..........
+====================
+select DEPARTMENT_ID, count(salary), round(avg(salary)), max(salary), min(salary), sum(salary), round(stddev(salary)), round(variance(salary)) from employees group by DEPARTMENT_ID;
+
+Max----Min date
+===============
+select min(hire_date), max(hire_date) from employees;
+
+
+3-62, part-1 (4 no example)
+=====================
+select LAST_NAME, SALARY, round(((SALARY* 15.5)/100))+SALARY "New Salary" ,(round(((SALARY* 15.5)/100))+SALARY - salary) as Increase from EMPLOYEES where EMPLOYEE_ID between 200 and 206; 
+
+
+3-62, part-1 (2 no example)
+=====================
+select LAST_NAME, SALARY, round(((SALARY* 15.5)/100))+SALARY "New Salary"  from EMPLOYEES where EMPLOYEE_ID between 200 and 206; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+ExcepTions
+=================
+
+declare
+    d_id customers.DEPARTMENT_ID%type := 100;
+    d_name customers.DEPARTMENT_NAME%type;
+    d_MANAGER_ID customers.MANAGER_ID%type;
+    d_LOCATION_ID customers.LOCATION_ID%type;
+
+begin
+    select DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID into d_name, d_MANAGER_ID, d_LOCATION_ID 
+    from customers
+    where DEPARTMENT_ID=d_id;
+
+     dbms_output.put_line('DEPARTMENT_NAME: ' || d_name );
+     dbms_output.put_line('MANAGER_ID: ' || d_MANAGER_ID );
+     dbms_output.put_line('LOCATION_ID: ' || d_LOCATION_ID );
+
+
+exception
+     when no_data_found then
+          dbms_output.put_line('No such customer!');
+
+      when others then
+           dbms_output.put_line('Error!');
+
+end;
+
+
+85 page example
+===========
+declare
+      c_id dept.DEPTNO%type :=11;
+      c_name dept.DNAME%type;
+      c_addr dept.LOC%type;
+
+
+     ex_invalid_id exception;
+begin
+     if c_id <=0 then
+        raise ex_invalid_id;
+   else
+       select DNAME, LOC into c_name, c_addr 
+       from dept
+       where DEPTNO=c_id;
+
+          dbms_output.put_line('DNAME : ' || c_name );
+          dbms_output.put_line('LOC : ' || c_addr );
+end if;
+
+exception
+         when ex_invalid_id then
+            dbms_output.put_line('Id must be greater than zero');
+         when no_data_found then
+            dbms_output.put_line('No such dept');
+         when others then
+            dbms_output.put_line('Error');
+
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

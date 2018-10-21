@@ -1,0 +1,106 @@
+string function and operator
+=====================
+
+declare
+       m varchar2(11) := 'hello world';
+begin
+       dbms_output.put_line(upper(m));
+       dbms_output.put_line(lower(m));
+       dbms_output.put_line(initcap(m));
+
+
+
+       dbms_output.put_line(substr(m,1,1));
+       dbms_output.put_line(substr(m,-1,1));
+       dbms_output.put_line(substr(m,7,5));
+
+
+       dbms_output.put_line(substr(m,2));
+
+       dbms_output.put_line(instr(m,'e'));
+
+
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

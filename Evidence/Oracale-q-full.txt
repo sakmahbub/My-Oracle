@@ -1,0 +1,79 @@
+1.  create user eidd identified by eidd;
+2. A. create table department(dep_id number(3) primary key, department_name varchar2(15));
+    B. create table employee(emp_id number(3) primary key, emp_name varchar2(15), mobile varchar2(12) unique, salary number(10) check (salary <10000 ), 
+      joining_date date default sysdate, country varchar2(15) default 'BD', dep_id number(3), constraint em_dep_fk foreign key (dep_id) references department(dep_id));
+
+(backup table)== create table employee_backup2(emp_id number(3) primary key, emp_name varchar2(15), mobile varchar2(12) unique, salary number(10) check(salary<10000), joining_date date default sysdate, country varchar2(15) default 'BD', dep_id number(3), constraint em1_dep_fk foreign key (dep_id) references department(dep_id));
+
+    C.  desc department; desc employee;
+    D. create or replace trigger emp_after_insert after insert on employee for each row
+	declare
+	begin
+	insert into employee values(:new.emp_id , :new.emp_name, :new.mobile, :new.salary, :new.joining_date, :new.country , :new.dep_id);
+	dbms_output.put_line('insert succesfully into employee_backup2 table');
+	end;
+ 	/
+
+
+
+create or replace trigger emp_after_update after update on employee for each row
+	declare
+	begin
+	update employee_backup2 set  emp_name=:new.emp_name, mobile=:new.mobile, country=:new.country where emp_id=:old.emp_id;
+	dbms_output.put_line('update succesfully into employee_backup2 table');
+	end;
+	 /
+
+
+create or replace trigger cus_after_delete after delete on employee for each row
+	declare
+	begin
+	delete employee_backup2 where emp_id=:old.emp_id;
+	dbms_output.put_line('delete succesfully into employee_backup2 table');
+	end;
+ 	/
+
+
+3. A. create sequence dep_seq increment by 10 start with 100 maxvalue 1000 nocache nocycle;
+   B.  create sequence emp_seq increment by 5 start with 100 maxvalue 1000 nocache nocycle;
+   C. select sequence_name from user_sequences;
+
+4.  A.  select index_name from user_indexes;
+    B. create index dep_in on department (department_name);
+    C. select index_name from user_indexes;
+    D. create or replace procedure insertDepartment (
+	p_dep_id in department.dep_id %type,
+	p_department_name in department.department_name%type,
+	is
+	begin
+	
+	insert into department (dep_id, department_name)values(p_dep_id, p_department_name);
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

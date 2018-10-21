@@ -1,0 +1,59 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Practise 6_1:Page 21:
+	select  last_name, hire_date from employees where department_id =  (select  department_id from employees where last_name = 'Zlotkey');
+
+Practise 6_2:Page 21:
+	select employee_id,last_name,salary from employees where salary > (select avg(salary)  from employees) order by salary;
+
+Practise 6_3:Page 21:
+	select employee_id,last_name from employees where  last_name like '%u%';
+
+Practise 6_4:Page 21:
+	select e.last_name,d.department_id,e.job_id from employees e, departments d where location_id = 1700;
+
+Practise 6_5:Page 21:
+	select last_name,salary from employees where last_name='King'; 
+	(Due to Solve this Problem)
+
+Practise 6_6:Page 21:
+	select d.department_id,e.last_name,e.job_id from employees e, departments d where department_name = 'Executive';
+
+Practise 6_7:Page 21:
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

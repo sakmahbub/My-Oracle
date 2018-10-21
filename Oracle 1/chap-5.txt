@@ -1,0 +1,45 @@
+Natural Join Table
+====================
+select DEPARTMENT_ID, DEPARTMENT_NAME, LOCATION_ID, city from DEPARTMENTS natural join LOCATIONS;
+
+All data join many table
+======================
+select * from EMPLOYEES e, DEPARTMENTS d where e.DEPARTMENT_ID =d.DEPARTMENT_ID;
+
+Natural Join Table with condition
+====================
+select DEPARTMENT_ID, DEPARTMENT_NAME, LOCATION_ID, city from DEPARTMENTS natural join LOCATIONS where DEPARTMENT_ID in (20,50);
+
+Using Clause
+=================
+select EMPLOYEES.EMPLOYEE_ID, LAST_NAME,EMAIL, FIRST_NAME, DEPARTMENTS.LOCATION_ID, DEPARTMENT_NAME, DEPARTMENTS.MANAGER_ID, DEPARTMENT_ID from EMPLOYEES  join DEPARTMENTS using (DEPARTMENT_ID);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

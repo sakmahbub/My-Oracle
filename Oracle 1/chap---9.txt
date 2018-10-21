@@ -1,0 +1,77 @@
+Primary key , unique not null and default date
+==============================
+
+create table test2(id number (2) primary key, name varchar2(6) unique not null , create_date date default sysdate);
+
+insert table==== insert into test2(id,name,create_date)values(13,'Msakil','25-jul-16');
+                           insert into test2(id,name)values(10,'Mahbub');
+
+
+
+Foreign key create
+=================
+ create table employees(id number(5) primary key, name varchar2(30) not null, d_id number(2),constraint em_dept_fk foreign key (d_id) references departments(id));
+Join:
+ID, Name and Department name
+select e.id, e.name,d.name from employees e, departments d where e.d_id=d.id;
+
+
+new insert colomn
+==========
+alter table country add name varchar2(20)  not null/unique/check/fk/pk;
+
+modify colomn
+=======
+alter table country modify name varchar2(20)  not null/unique/check/fk/pk;
+
+
+drop/delete colomn
+=========
+
+ alter table country drop colomn name;
+
+
+Rename colomn
+============
+alter table country rename colomn id to country_id;
+
+table name rename
+================
+alter table country rename to countryyyyyyyyyyyy;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

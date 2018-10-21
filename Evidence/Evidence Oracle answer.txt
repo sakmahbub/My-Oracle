@@ -1,0 +1,87 @@
+create user eid5 identified by eid5;
+grant dba to eid5;
+connect eid5
+
+create table:
+	create table emp(eid number(3), ename varchar2(15), salary number(8,2), hire_date date, address varchar2(30));
+add primary key:
+	alter table emp add constraint emp_id_pk primary key(eid);
+insert with &:
+	insert into emp(eid, ename, salary, hire_date, address)values(&eid, '&ename', &salary, &hire_date, '&address');
+add column:
+	alter table emp add(phone varchar2(12), job_title varchar2(10));
+salary 30%:
+	select ename, job_title, salary, salary+(salary*.30) as review_salary from emp; or
+	select ename, job_title, salary, salary+(salary*.30) "review_salary" from emp;
+min salary:
+	select ename, salary from emp where salary=(select min(salary) from emp);
+delete all data:
+	delete emp;
+Backup table:
+	create table emp_backup as select * from emp;
+
+============insert trigger ==============
+create or replace trigger emp_after_insert after insert on emp
+for each row
+	declare
+	begin
+	insert into emp_backup values(:new.eid, :new.ename,:new.salary,:new.hire_date,:new.address,:new.phone,:new.job_title);
+	dbms_output.put_line('Insert succesfully');
+	end;
+	/
+=============Update trigger ============
+create or replace trigger emp_after_update after update on emp
+for each row
+	declare
+	begin
+	update emp_backup set ename=:new.ename, salary=:new.salary, hire_date=:new.hire_date, address=:new.address, phone=:new.phone, job_title=:new.job_title where eid=:old.eid;
+	dbms_output.put_line('update succesfully');
+	end;
+	/
+============= Delete trigger ============
+create or replace trigger emp_after_delete after delete on emp
+for each row
+	declare
+	begin
+	delete emp_backup where eid=:old.eid;
+	dbms_output.put_line('delete succesfully');
+	end;
+	/
+create sequence:
+	create sequence emp_seq increment by 10 start with 100 maxvalue 1000 nocycle nocache;
+
+insert data:
+	insert into emp(eid, ename, salary, hire_date, address, phone, job_title)values(emp_seq.nextval,'Mahbub', 50000, '10-jun-1992', 'Dhaka', '01722928984','Prog');
+
+delete & update:
+	select * from emp;
+	select * from emp_backup;
+	delete emp where eid=130;
+	update emp set ename='Sakil' where eid=120;
+
+
+
+
+
+ create or replace procedure insertEmp(p_id in emp.eid%type, p_name in emp.ename%type, p_salary in emp.salary%type, p_phone in emp.phone%type)
+	is
+	begin
+	insert into emp(eid, ename, salary, phone)values(p_id, p_name, p_salary, p_phone);
+	end;
+	/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

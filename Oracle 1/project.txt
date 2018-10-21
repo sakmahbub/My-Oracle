@@ -1,0 +1,129 @@
+table name
+==========
+country: 
+create table country(coun_id number(2) primary key, coun_name varchar2(20) not null);
+
+columns:
+insert into country(coun_id, coun_name)values(01,'Bangladesh');
+insert into country(coun_id, coun_name)values(02,'Pakisthan');
+insert into country(coun_id, coun_name)values(03,'India');
+insert into country(coun_id, coun_name)values(04,'Vutan');
+
+division: 
+create table division(div_id number(3) primary key, div_name varchar2(20) not null, coun_id number(2), constraint c_d_fk foreign key(coun_id) references country(coun_id));
+
+columns:
+insert into division(div_id, div_name, coun_id)values(1,'Dhaka',1);
+insert into division(div_id, div_name, coun_id)values(2,'Rajshahi',1);
+insert into division(div_id, div_name, coun_id)values(3,'Barishal',1);
+insert into division(div_id, div_name, coun_id)values(4,'Chittagong',1);
+insert into division(div_id, div_name, coun_id)values(5,'Rangpur',1); 
+insert into division(div_id, div_name, coun_id)values(6,'Sylhet',1);
+insert into division(div_id, div_name, coun_id)values(7,'Mymensingh',1);
+insert into division(div_id, div_name, coun_id)values(8,'Khulna',1);
+
+
+district:
+create table district(dis_id number(3) primary key, dis_name varchar2(20) not null, div_id number(3), constraint d_d_fk foreign key(div_id) references division(div_id));
+columns:
+insert into district(dis_id, dis_name, div_id)values(1,'Bogra',2);
+insert into district(dis_id, dis_name, div_id)values(2,'Dhaka',1);
+insert into district(dis_id, dis_name, div_id)values(3,'Gaibadha',5);
+insert into district(dis_id, dis_name, div_id)values(4,'Bandarban',4);
+insert into district(dis_id, dis_name, div_id)values(5,'Bhola',3);
+insert into district(dis_id, dis_name, div_id)values(6,'Habiganj',6);
+insert into district(dis_id, dis_name, div_id)values(7,'Netrokona',7);
+insert into district(dis_id, dis_name, div_id)values(8,'Bagerhat',8);
+
+thana:
+create table thana(tha_id number(3) primary key, tha_name varchar2(20) not null, dis_id number(3), constraint d_t_fk foreign key(dis_id) references district(dis_id));
+columns:
+insert into thana(tha_id, tha_name, dis_id)values(1,'Adamdighi',1);
+insert into thana(tha_id, tha_name, dis_id)values(2,'Dhanmondi',2);
+insert into thana(tha_id, tha_name, dis_id)values(3,'Gobindaganj',3);
+insert into thana(tha_id, tha_name, dis_id)values(4,'Thanchi',4);
+insert into thana(tha_id, tha_name, dis_id)values(5,'Lalmohan',5);
+insert into thana(tha_id, tha_name, dis_id)values(6,'Nabiganj',6);
+insert into thana(tha_id, tha_name, dis_id)values(7,'Mohanganj',7);
+insert into thana(tha_id, tha_name, dis_id)values(8,'Fakirhat',8);
+
+
+
+
+unions:
+create table unions(uni_id number(3) primary key, uni_name varchar2(20) not null, tha_id number(3), constraint t_u_fk foreign key(tha_id) references thana(tha_id));
+columns:
+
+insert into unions(uni_id, uni_name, tha_id)values(1,'Bargacha',1);
+insert into unions(uni_id, uni_name, tha_id)values(2,'karai kabelabad',2);
+insert into unions(uni_id, uni_name, tha_id)values(3,'Boropukuria',3);
+insert into unions(uni_id, uni_name, tha_id)values(4,'daridaha',4);
+insert into unions(uni_id, uni_name, tha_id)values(5,'Kodomtoli',5);
+insert into unions(uni_id, uni_name, tha_id)values(6,'Gahelapur',6);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
